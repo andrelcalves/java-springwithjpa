@@ -1,10 +1,11 @@
 package com.example.sprignboot.jpaExampe.domain.model;
 
+import com.example.sprignboot.jpaExampe.domain.model.enumerator.Color;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
-@Table(name="Products")
 public class Product {
 
     @Id
@@ -13,13 +14,21 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    private LocalDate createdDate = LocalDate.now();
+    @Enumerated(EnumType.STRING)
+    private Color color;
+    @ManyToOne
+    private Category category;
+
 
     protected Product(){}
 
-    public Product(String Name, String Description, BigDecimal Price){
+    public Product(String Name, String Description, BigDecimal Price, Color color, Category category){
         this.name = Name;
         this.description = Description;
         this.price = Price;
+        this.color = color;
+        this.category = category;
     }
 
     public Long getId() {
@@ -52,6 +61,21 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    public Category getCategory() {
+        return this.category;
     }
 
 
