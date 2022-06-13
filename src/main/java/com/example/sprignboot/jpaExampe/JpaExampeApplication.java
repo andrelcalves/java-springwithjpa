@@ -38,6 +38,8 @@ public class JpaExampeApplication {
 			repositoryProduct.save(new Product("Iphone ProMax", "Mobile Iphone ProMax",new BigDecimal(1800) ,Color.BLACK,mobile));
 			repositoryProduct.save(new Product("Motorola v9", "MMotorola v9",new BigDecimal(1800) ,Color.RED,mobile));
 			repositoryProduct.save(new Product("Java for web", "Programming Java for Web", new BigDecimal(100),Color.NONE,book));
+
+
 			// fetch all customers
 			log.info("Products found with findAll():");
 			log.info("-------------------------------");
@@ -45,6 +47,11 @@ public class JpaExampeApplication {
 				log.info(product.getDescription() + " - " + product.getCategory().getName());
 			}
 			log.info("");
+
+			//test of removing a category - ERROR integrity constraint
+			//Referential integrity constraint violation: "FK1MTSBUR82FRN64DE7BALYMQ9S: PUBLIC.PRODUCT FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (CAST(2 AS BIGINT))"
+			repositoryCategory.delete(book);
+
 		};
 	}
 }
