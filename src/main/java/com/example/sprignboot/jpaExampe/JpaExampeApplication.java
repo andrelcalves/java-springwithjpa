@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @SpringBootApplication
 public class JpaExampeApplication {
@@ -47,10 +48,23 @@ public class JpaExampeApplication {
 				log.info(product.getDescription() + " - " + product.getCategory().getName());
 			}
 			log.info("");
+			Product product = repositoryProduct.findById(2);
+			log.info(product.getDescription());
+			log.info("");
+
+			log.info("");
+			Product productBook = repositoryProduct.findByName("Java for web");
+			log.info(productBook.getDescription());
+			log.info("");
+
+			log.info("");
+			for (Product productCategory : repositoryProduct.findByCategory(mobile)) {
+				log.info(productCategory.getDescription() + " - " + productCategory.getCategory().getName());
+			}
 
 			//test of removing a category - ERROR integrity constraint
 			//Referential integrity constraint violation: "FK1MTSBUR82FRN64DE7BALYMQ9S: PUBLIC.PRODUCT FOREIGN KEY(CATEGORY_ID) REFERENCES PUBLIC.CATEGORY(ID) (CAST(2 AS BIGINT))"
-			repositoryCategory.delete(book);
+			//repositoryCategory.delete(book);
 
 		};
 	}
