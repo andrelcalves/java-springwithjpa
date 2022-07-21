@@ -2,18 +2,17 @@ package com.example.sprignboot.jpaExampe;
 
 import com.example.sprignboot.jpaExampe.domain.model.Category;
 import com.example.sprignboot.jpaExampe.domain.model.enumerator.Color;
-import com.example.sprignboot.jpaExampe.infra.repository.CategoryRepository;
+import com.example.sprignboot.jpaExampe.dataprovider.database.repository.CategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.sprignboot.jpaExampe.domain.model.Product;
-import com.example.sprignboot.jpaExampe.infra.repository.ProductRepository;
+import com.example.sprignboot.jpaExampe.dataprovider.database.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @SpringBootApplication
 public class JpaExampeApplication {
