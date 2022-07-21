@@ -1,5 +1,5 @@
 # java-springwithjpa
-Simple examples using Clean Arch with SpringBoot and JPA
+Simple examples using Clean Arch with SpringBoot, JPA, Feign Client
 
 <img src="assets/architecture.png">
 
