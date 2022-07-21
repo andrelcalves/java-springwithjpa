@@ -1,20 +1,24 @@
 package com.example.sprignboot.jpaExampe;
 
-import com.example.sprignboot.jpaExampe.domain.model.Category;
-import com.example.sprignboot.jpaExampe.domain.model.enumerator.Color;
+import com.example.sprignboot.jpaExampe.dataprovider.client.TodoExampleClient;
 import com.example.sprignboot.jpaExampe.dataprovider.database.repository.CategoryRepository;
+import com.example.sprignboot.jpaExampe.dataprovider.database.repository.ProductRepository;
+import com.example.sprignboot.jpaExampe.domain.model.Category;
+import com.example.sprignboot.jpaExampe.domain.model.Product;
+import com.example.sprignboot.jpaExampe.domain.model.enumerator.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.example.sprignboot.jpaExampe.domain.model.Product;
-import com.example.sprignboot.jpaExampe.dataprovider.database.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-
+import com.example.sprignboot.jpaExampe.domain.model.Todo;
 import java.math.BigDecimal;
 
 @SpringBootApplication
+@EnableFeignClients
 public class JpaExampeApplication {
 
 
@@ -24,9 +28,19 @@ public class JpaExampeApplication {
 		SpringApplication.run(JpaExampeApplication.class, args);
 	}
 
+
+	@Autowired
+	TodoExampleClient todoClient;
 	@Bean
 	public CommandLineRunner demo(ProductRepository repositoryProduct, CategoryRepository repositoryCategory) {
 		return (args) -> {
+			// Http client
+			log.info("HttpClient getTodos():");
+			log.info("-------------------------------");
+			for (Todo todos: todoClient.getTodos()) {
+				log.info(todos.getTitle());
+			}
+
 			// save a few categories
 			Category mobile = new Category("Mobile");
 			Category book = new Category("Book");
